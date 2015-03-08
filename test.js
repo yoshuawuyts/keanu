@@ -10,7 +10,7 @@ var keanu = require('./index');
  * Test
  */
 
-describe('', function() {
+describe('keanu', function() {
   it('', function() {
 
   });

@@ -227,13 +227,11 @@ function _characterFromEvent(e) {
  */
 
 function _stop(e) {
-  var element = e.target || e.srcElement,
-        tag_name = element.tagName;
+  var element = e.target || e.srcElement;
+  var tag_name = element.tagName;
 
   // if the element has the class "mousetrap" then no need to stop
-  if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
-    return false;
-  }
+  if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) return false;
 
   // stop for input, select, and textarea
   return tag_name == 'INPUT'
@@ -251,7 +249,9 @@ function _stop(e) {
  */
 
 function _modifiersMatch(modifiers1, modifiers2) {
-  return modifiers1.sort().join(',') === modifiers2.sort().join(',');
+  var fir = modifiers1.sort().join(',');
+  var sec = modifiers2.sort().join(',')
+  return fir == second;
 }
 
 /**
@@ -260,18 +260,16 @@ function _modifiersMatch(modifiers1, modifiers2) {
  * @param {Object} do_not_reset
  * @returns void
  */
+
 function _resetSequences(do_not_reset) {
   do_not_reset = do_not_reset || {};
 
   var active_sequences = false;
-  var key;
+  var key = null;
 
   for (key in _sequence_levels) {
-    if (do_not_reset[key]) {
-      active_sequences = true;
-      continue;
-    }
-    _sequence_levels[key] = 0;
+    if (!do_not_reset[key]) return _sequence_levels[key] = 0;
+    active_sequences = true;
   }
 
   if (!active_sequences) _inside_sequence = false;
